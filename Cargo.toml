@@ -187,6 +187,7 @@ bin = [
   { name = "try_from_into_sol", path = "solutions/23_conversions/try_from_into.rs" },
   { name = "as_ref_mut", path = "exercises/23_conversions/as_ref_mut.rs" },
   { name = "as_ref_mut_sol", path = "solutions/23_conversions/as_ref_mut.rs" },
+  { name = "guessing_game", path = "src/guessing_game.rs" },
 ]
 
 [package]
@@ -194,6 +195,9 @@ name = "exercises"
 edition = "2021"
 # Don't publish the exercises on crates.io!
 publish = false
+
+[dependencies]
+rand = "0.8.5"
 
 [profile.release]
 panic = "abort"
