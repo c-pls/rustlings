@@ -9,7 +9,7 @@ fn main() {
 
     let data = "Guilding star";
 
-    let s = data.to_string();
+    let _s = data.to_string();
 
     let s1 = String::from("Hello, ");
     let s2 = String::from("world!");
