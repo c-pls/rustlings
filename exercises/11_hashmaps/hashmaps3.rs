@@ -9,7 +9,7 @@
 use std::collections::HashMap;
 
 // A structure to store the goal details of a team.
-#[derive(Default)]
+#[derive(Default, Debug)]
 struct TeamScores {
     goals_scored: u8,
     goals_conceded: u8,
@@ -31,6 +31,54 @@ fn build_scores_table(results: &str) -> HashMap<&str, TeamScores> {
         // Keep in mind that goals scored by team 1 will be the number of goals
         // conceded by team 2. Similarly, goals scored by team 2 will be the
         // number of goals conceded by team 1.
+
+        // Insert the default with zeros if a team doesn't exist yet.
+        // let team_1 = scores.entry(team_1_name).or_default();
+        // // Update the values.
+        // team_1.goals_scored += team_1_score;
+        // team_1.goals_conceded += team_2_score;
+
+        // // Similarly for the second team.
+        // let team_2 = scores.entry(team_2_name).or_default();
+        // team_2.goals_scored += team_2_score;
+        // team_2.goals_conceded += team_1_score;
+
+        // Native implementation, below is much more cleaner.
+        let team1_result = scores.get(team_1_name);
+        match team1_result {
+            Some(res) => scores.insert(
+                team_1_name,
+                TeamScores {
+                    goals_scored: res.goals_scored + team_1_score,
+                    goals_conceded: res.goals_conceded + team_2_score,
+                },
+            ),
+            None => scores.insert(
+                team_1_name,
+                TeamScores {
+                    goals_scored: team_1_score,
+                    goals_conceded: team_2_score,
+                },
+            ),
+        };
+
+        let team2_result = scores.get(team_2_name);
+        match team2_result {
+            Some(res) => scores.insert(
+                team_2_name,
+                TeamScores {
+                    goals_scored: res.goals_scored + team_2_score,
+                    goals_conceded: res.goals_conceded + team_1_score,
+                },
+            ),
+            None => scores.insert(
+                team_2_name,
+                TeamScores {
+                    goals_scored: team_2_score,
+                    goals_conceded: team_1_score,
+                },
+            ),
+        };
     }
 
     scores
