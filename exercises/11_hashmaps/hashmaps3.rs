@@ -43,7 +43,7 @@ fn build_scores_table(results: &str) -> HashMap<&str, TeamScores> {
         // team_2.goals_scored += team_2_score;
         // team_2.goals_conceded += team_1_score;
 
-        // Native implementation, below is much more cleaner.
+        // Native implementation, above is much more cleaner.
         let team1_result = scores.get(team_1_name);
         match team1_result {
             Some(res) => scores.insert(
