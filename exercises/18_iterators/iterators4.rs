@@ -10,6 +10,15 @@ fn factorial(num: u64) -> u64 {
     // - additional variables
     // For an extra challenge, don't use:
     // - recursion
+    // (1..num+1).fold(1, |acc, e| acc * e)
+    (2..=num).product()
+}
+
+fn factorial_recursive(num: u64) -> u64 {
+    match num {
+        0 | 1 => 1,
+        _ => num * factorial_recursive(num - 1),
+    }
 }
 
 fn main() {
@@ -37,5 +46,24 @@ mod tests {
     #[test]
     fn factorial_of_4() {
         assert_eq!(factorial(4), 24);
+    }
+
+    #[test]
+    fn factorial_of_0_recursive() {
+        assert_eq!(factorial_recursive(0), 1);
+    }
+
+    #[test]
+    fn factorial_of_1_recursive() {
+        assert_eq!(factorial_recursive(1), 1);
+    }
+    #[test]
+    fn factorial_of_2_recursive() {
+        assert_eq!(factorial_recursive(2), 2);
+    }
+
+    #[test]
+    fn factorial_of_4_recursive() {
+        assert_eq!(factorial_recursive(4), 24);
     }
 }
